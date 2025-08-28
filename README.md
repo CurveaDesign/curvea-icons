@@ -7,7 +7,8 @@ It includes **solid, regular, and brand** icons with the same class structure yo
 - `ci ci-regular ci-star`
 - `ci ci-brands ci-twitter`
 
-![Curvea Icons Gallery](https://curveadesign.github.io/curvea-icons/Screenshot.png)
+![Curvea Icons Gallery](Screenshot.png)
+
 
 
 ---
