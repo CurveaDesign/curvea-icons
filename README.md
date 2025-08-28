@@ -14,7 +14,7 @@ It includes **solid, regular, and brand** icons with the same class structure yo
 Include the stylesheet via CDN (jsDelivr):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/USERNAME/curvea-icons@v1.0.0/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/curveadesign/curvea-icons@v1.0.0/dist/style.css">
 ```
 
 ## 🙏 Attribution
