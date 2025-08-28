@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Curvea Icons — Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Use your local CSS while developing -->
+  <link rel="stylesheet" href="dist/style.css">
+
+  <style>
+    /* ===========================
+       THEME (Dark default; Light via [data-theme="light"])
+       =========================== */
+    :root{
+      --bg:#0b0d10;
+      --card:#12151a;
+      --muted:#99a3b3;
+      --text:#eef3fb;
+      --brand:#66d9ef;
+      --accent:#7ee787;
+      --warn:#f2cc60;
+      --danger:#ff7b72;
+      --border:#202631;
+      --stage:#0f1319;
+      --stage-border:#1d2531;
+      --shadow:0 6px 18px rgba(0,0,0,.28);
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f7fb; --card:#ffffff; --muted:#6a7689; --text:#0a0c10;
+        --brand:#1565d8; --accent:#2ea043; --warn:#b98900; --danger:#b62424;
+        --border:#e6e8ef; --stage:#fafbff; --stage-border:#e9ebf2;
+        --shadow:0 8px 24px rgba(20,23,28,.08);
+      }
+    }
+    :root[data-theme="light"]{
+      --bg:#f6f7fb; --card:#ffffff; --muted:#6a7689; --text:#0a0c10;
+      --brand:#1565d8; --accent:#2ea043; --warn:#b98900; --danger:#b62424;
+      --border:#e6e8ef; --stage:#fafbff; --stage-border:#e9ebf2;
+      --shadow:0 8px 24px rgba(20,23,28,.08);
+    }
+
+    /* ===========================
+       BASE LAYOUT
+       =========================== */
+    html,body{margin:0;background:var(--bg);color:var(--text);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue","Noto Sans",Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    a{color:var(--brand);text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+
+    header{
+      display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:16px
+    }
+    .title{
+      display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:.2px
+    }
+    .controls{
+      display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end
+    }
+
+    .input,.select,.btn{
+      background:var(--card);color:var(--text);border:1px solid var(--border);
+      padding:10px 12px;border-radius:12px;font-size:14px;outline:none;transition:.15s border-color ease;
+    }
+    .input:focus,.select:focus,.btn:focus{
+      border-color:color-mix(in oklab, var(--brand) 60%, var(--border));
+      outline:2px solid color-mix(in oklab, var(--brand) 40%, transparent);outline-offset:2px;
+    }
+    .select{cursor:pointer}
+    .btn{cursor:pointer}
+    .btn.ghost{background:transparent}
+    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+    @media (max-width:720px){
+      .controls{justify-content:stretch}
+      .input{flex:1;min-width:180px}
+    }
+
+    /* Theme toggle icon button */
+    .icon-btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:40px;height:40px;border-radius:12px;border:1px solid var(--border);
+      background:var(--card);padding:0
+    }
+    .icon-btn svg{width:18px;height:18px;fill:var(--text)}
+
+    /* Show icons clearly in both themes */
+    .ci{ color: var(--text); }
+
+    /* CDN bar */
+    .cdnbar{
+      display:flex;gap:8px;align-items:center;background:var(--card);
+      border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin:8px 0 18px 0
+    }
+    .cdnbar code{
+      flex:1;background:var(--stage);border:1px solid var(--stage-border);border-radius:10px;
+      padding:8px 10px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:12.5px;white-space:nowrap;overflow:auto;color:var(--text)
+    }
+
+    /* Grid & cards */
+    .grid{
+      display:grid;gap:12px;
+      grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    }
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;
+      transition:transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease
+    }
+    .card:hover{transform:translateY(-2px);border-color:color-mix(in oklab, var(--brand) 25%, var(--border));box-shadow:var(--shadow)}
+    .iconstage{
+      display:grid;place-items:center;height:84px;border-radius:12px;
+      background:var(--stage);border:1px dashed var(--stage-border)
+    }
+    .iconstage i{font-size:32px;line-height:1}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:6px}
+    .name{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .badge{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+    .badge.solid{color:#9ecbff;border-color:#264f78}
+    .badge.regular{color:#ffd580;border-color:#4f3d19}
+    .badge.brands{color:#a1ffce;border-color:#1d4737}
+    .card:hover .badge.brands{background:linear-gradient(135deg,#1da1f2 0,#6c5ce7 100%);color:#fff;border-color:transparent}
+    .card:hover .badge.solid{background:#234a72;color:#d6eeff;border-color:transparent}
+    .card:hover .badge.regular{background:#47320e;color:#ffe7b8;border-color:transparent}
+
+    .no-results{opacity:.8;padding:28px;text-align:center;border:1px dashed var(--border);border-radius:12px}
+
+    /* Modal (responsive, no overlap) */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      display:none;align-items:center;justify-content:center;padding:16px;z-index:50
+    }
+    .modal{
+      width:min(740px,100%);background:var(--card);border:1px solid var(--border);
+      border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.4);max-height:90vh;overflow:auto
+    }
+    .modal header{position:sticky;top:0;background:var(--card);padding:16px 18px;border-bottom:1px solid var(--border);z-index:1}
+    .modal header .title{font-size:16px}
+    .modal .body{padding:18px;display:grid;gap:16px}
+    .preview{
+      display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap
+    }
+    .preview i{font-size:56px;flex:0 0 auto}
+    .hint{color:var(--muted);font-size:12px;min-width:220px}
+
+    .kvs{display:grid;gap:12px}
+    .kv{display:grid;gap:6px}
+    .kv label{font-size:12px;color:var(--muted)}
+    .code{
+      position:relative;
+      background:var(--stage);border:1px solid var(--stage-border);border-radius:10px;
+      padding:10px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:13px;color:var(--text);overflow:auto;white-space:nowrap
+    }
+
+    .modal .actions{display:flex;gap:8px;justify-content:flex-end;padding:0 18px 18px}
+    .btn.copy{background:var(--stage);border-color:var(--stage-border)}
+
+    .footer{margin-top:16px;display:flex;gap:8px;align-items:center;justify-content:flex-end}
+    .pill{padding:4px 8px;border-radius:999px;background:var(--stage);border:1px solid var(--stage-border);color:var(--muted);font-size:11px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <!-- Small logo mark using inline SVG -->
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:currentColor;opacity:.9">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.88L18.18 22 12 18.6 5.82 22 7 14.15l-5-4.88 6.91-1.01L12 2z"/>
+        </svg>
+        Curvea Icons — Gallery
+      </div>
+
+      <div class="controls">
+        <input id="search" class="input" placeholder="Search icons (name)…" />
+        <select id="filter" class="select" title="Filter by set">
+          <option value="all">All</option>
+          <option value="solid">Solid</option>
+          <option value="regular">Regular</option>
+          <option value="brands">Brands</option>
+        </select>
+
+        <!-- Theme toggle icon button -->
+        <button id="themeToggle" class="btn icon-btn" title="Toggle theme" aria-label="Toggle theme">
+          <!-- Two inline SVGs; we toggle visibility in JS -->
+          <svg id="iconSun" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.8-1.79 1.41 1.41-1.79 1.8-1.42-1.42zM12 4V1h-0v3h0zm0 19v-3h0v3h0zM4 13H1v-2h3v2zm19 0h-3v-2h3v2zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zM19.66 19.78l-1.8-1.79 1.42-1.42 1.79 1.8-1.41 1.41zM12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          <svg id="iconMoon" viewBox="0 0 24 24" role="img" aria-hidden="true" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3c.15 0 .29.01.44.02A7 7 0 1021 12.79z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- CDN bar (top, global) -->
+    <div class="cdnbar">
+      <code id="cdnCode">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/USER/REPO@VERSION/path/to/style.css"&gt;</code>
+      <button id="copyCdn" class="btn">Copy</button>
+    </div>
+
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="no-results" style="display:none;">No icons match your search.</div>
+
+    <div class="footer">
+      <span class="pill">Tip: click any icon to copy usage</span>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header>
+        <div class="title" id="modalTitle">Icon</div>
+      </header>
+      <div class="body">
+        <div class="preview">
+          <i id="modalPreview" class="ci"></i>
+          <div class="hint" id="modalHint"></div>
+        </div>
+
+        <div class="kvs">
+          <div class="kv">
+            <label>HTML</label>
+            <div id="htmlCode" class="code"></div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn copy" id="copyHtml">Copy HTML</button>
+        <button class="btn primary" id="closeModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========= CONFIG =========
+    // Set this to your GitHub/JSDelivr link when published:
+    // Example: https://cdn.jsdelivr.net/gh/USER/REPO@v1.0.0/dist/style.css
+    const CDN_CSS_URL = 'https://cdn.jsdelivr.net/gh/USER/REPO@VERSION/path/to/style.css';
+
+    // Put CDN value in the top code block
+    const cdnCode = document.getElementById('cdnCode');
+    const copyCdnBtn = document.getElementById('copyCdn');
+    const linkHtml = `<link rel="stylesheet" href="${CDN_CSS_URL}">`;
+    cdnCode.textContent = linkHtml;
+
+    // ========= ICON REGISTRY (names must match your CSS) =========
+    const ICONS = {
+      solid: [
+        "angle-down","angle-left","angle-right","angle-up",
+        "arrow-down","arrow-left","arrow-right","arrow-up","arrow-up-right-from-square",
+        "at","bars","bell","bookmark","calendar","calendar-days","camera",
+        "caret-down","caret-left","caret-right","caret-up",
+        "cart-shopping","check","check-circle","chevron-down","chevron-left","chevron-right","chevron-up",
+        "circle-notch","clock","cog","comment","comments","copy","credit-card",
+        "download","ellipsis","ellipsis-h","ellipsis-v","envelope","exclamation-triangle",
+        "eye","eye-slash","file","file-csv","file-excel","file-lines","file-pdf","file-word",
+        "filter","flag","folder","folder-open","gear","heart","home","house",
+        "id-card","image","info-circle","key","link","location-dot","lock",
+        "magnifying-glass","map","map-marker","minus","minus-circle","moon","pause","pen","pen-to-square",
+        "phone","play","plus","plus-circle","question-circle","rotate","search","share","share-nodes",
+        "shopping-cart","sliders","sort","spinner","star","stop","sun","sync","table",
+        "thumbs-down","thumbs-up","times","tools","trash","truck","unlock","upload",
+        "user","user-check","user-gear","user-minus","user-plus","users","video",
+        "volume-down","volume-up","volume-xmark","wallet","wrench","xmark"
+      ],
+      regular: [
+        "edit","bell","bookmark","calendar","calendar-days","camera","check-circle","circle","clock",
+        "comment","comments","copy","credit-card","envelope","eye","eye-slash",
+        "file","file-excel","file-lines","file-pdf","file-word","folder","folder-open",
+        "home","house","id-card","image","map","moon","star","thumbs-down","thumbs-up","user"
+      ],
+      brands: [
+        "amazon","anghami","apple","app-store","behance","bitbucket","bootstrap",
+        "cc-mastercard","cc-visa","css3","discord","dribbble","dropbox","facebook","facebook-f",
+        "figma","github","gitlab","google","google-drive","google-play","html5","instagram",
+        "linkedin","linkedin-in","microsoft","npm","patreon","paypal","pinterest","pinterest-p",
+        "react","reddit","slack","snapchat","soundcloud","spotify","stack-overflow","telegram",
+        "tiktok","twitch","twitter","vuejs","whatsapp","wordpress","x-twitter","youtube"
+      ]
+    };
+
+    // ========= DOM =========
+    const $ = sel => document.querySelector(sel);
+    const grid = $('#grid');
+    const empty = $('#empty');
+    const search = $('#search');
+    const filter = $('#filter');
+    const modalBackdrop = $('#modalBackdrop');
+    const modalTitle = $('#modalTitle');
+    const modalPreview = $('#modalPreview');
+    const modalHint = $('#modalHint');
+    const htmlCode = $('#htmlCode');
+
+    // ========= RENDER =========
+    const allIcons = [];
+    for (const fam of Object.keys(ICONS)) {
+      ICONS[fam].forEach(name => allIcons.push({ family: fam, name }));
+    }
+
+    function badge(family){
+      const cls = family === 'brands' ? 'brands' : (family === 'regular' ? 'regular' : 'solid');
+      const label = family[0].toUpperCase() + family.slice(1);
+      return `<span class="badge ${cls}">${label}</span>`;
+    }
+
+    function render(list){
+      grid.innerHTML = '';
+      if (!list.length){ empty.style.display='block'; return; }
+      empty.style.display='none';
+      for (const item of list){
+        const card = document.createElement('button');
+        card.className = 'card';
+        card.setAttribute('type','button');
+        card.innerHTML = `
+          <div class="iconstage">
+            <i class="ci ci-${item.family} ci-${item.name}"></i>
+          </div>
+          <div class="meta">
+            <div class="name" title="${item.name}">${item.name}</div>
+            ${badge(item.family)}
+          </div>
+        `;
+        card.addEventListener('click', () => openModal(item));
+        grid.appendChild(card);
+      }
+    }
+
+    function filterIcons(){
+      const q = search.value.trim().toLowerCase();
+      const fam = filter.value;
+      let list = allIcons;
+      if (fam !== 'all') list = list.filter(i => i.family === fam);
+      if (q) list = list.filter(i => (i.name.includes(q)));
+      render(list);
+    }
+
+    search.addEventListener('input', filterIcons);
+    filter.addEventListener('change', filterIcons);
+
+    // ========= MODAL =========
+    function openModal(item){
+      const classes = `ci ci-${item.family} ci-${item.name}`;
+      modalTitle.textContent = `${item.family.toUpperCase()} · ${item.name}`;
+      modalPreview.className = classes;
+      modalHint.innerHTML = `
+        Use this markup:<br/><br/>
+        <code class="pill">&lt;i class="ci ci-${item.family} ci-${item.name}"&gt;&lt;/i&gt;</code>
+      `;
+      htmlCode.textContent = `<i class="ci ci-${item.family} ci-${item.name}"></i>`;
+      modalBackdrop.style.display = 'flex';
+    }
+
+    function closeModal(){ modalBackdrop.style.display = 'none'; }
+    $('#closeModal').addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) closeModal(); });
+
+    // Copy buttons with feedback
+    $('#copyHtml').addEventListener('click', () => {
+      navigator.clipboard.writeText(htmlCode.textContent).then(() => {
+        const btn = $('#copyHtml');
+        const old = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        setTimeout(()=> btn.textContent = old, 1200);
+      });
+    });
+
+    // CDN copy with feedback
+    copyCdnBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(cdnCode.textContent).then(() => {
+        const old = copyCdnBtn.textContent;
+        copyCdnBtn.textContent = 'Copied ✓';
+        setTimeout(()=> copyCdnBtn.textContent = 'Copy', 1200);
+      });
+    });
+
+    // ========= THEME TOGGLE (icon changes) =========
+    const themeBtn = document.getElementById('themeToggle');
+    const iconSun = document.getElementById('iconSun');
+    const iconMoon = document.getElementById('iconMoon');
+
+    function setTheme(forceLight){
+      const root = document.documentElement;
+      if (forceLight === true) {
+        root.setAttribute('data-theme','light');
+        iconSun.style.display = 'none';
+        iconMoon.style.display = 'block';
+      } else if (forceLight === false) {
+        root.removeAttribute('data-theme');
+        iconSun.style.display = 'block';
+        iconMoon.style.display = 'none';
+      } else {
+        // toggle
+        const isLight = root.getAttribute('data-theme') === 'light';
+        setTheme(!isLight);
+      }
+    }
+
+    themeBtn.addEventListener('click', () => setTheme());
+
+    // ========= INIT =========
+    render(allIcons);
+  </script>
+</body>
+</html>
