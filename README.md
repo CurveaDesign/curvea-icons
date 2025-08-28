@@ -15,7 +15,7 @@ Include the stylesheet via CDN (jsDelivr):
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/USERNAME/curvea-icons@v1.0.0/dist/style.css">
-
+```
 
 ## 🙏 Attribution
 
